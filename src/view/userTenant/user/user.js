@@ -5,7 +5,18 @@ import { selectListRecord,selectListTenant } from '../../../api/record/recordtyp
 export default {
     data() {
         return {
-            demo:''
+            demo: '',
+            labelCol: { span: 4 },
+            wrapperCol: { span: 14 },
+            form: {
+                name: '',
+                region: null,
+                date1: null,
+                delivery: false,
+                type: [],
+                resource: '',
+                desc: '',
+            }
         }
     },
     mounted() { 
@@ -32,8 +43,10 @@ export default {
             selectListTenant().then(res => { 
                 console.log('访问远程调用的接口返回的是',res)
             })
+        },
+        onSubmit() {
+            console.log('submit!', this.form);
         }
-
     }
 
 }

@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from '../../libs/axios'
 import config from '../../config'
 
-const record = config.gateway + config.service.record
+const record = config.service.record
 
 export const selectListRecord = (params) => {
     return axios({

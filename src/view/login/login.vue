@@ -34,6 +34,8 @@
   </div>
 </template>
 <script>
+import { getTocken } from "../../api/login/login.js";
+import Vue from "vue";
 export default {
   data() {
     return {
@@ -49,6 +51,19 @@ export default {
   methods: {
     onSubmit() {
       console.log("登录信息", this.form);
+      let param = {
+        client_id: "cl",
+        client_secret: "secret",
+        redirect_uri: "http://www.baidu.com",
+        grant_type: "password",
+        username: this.form.username,
+        password: this.form.password
+      };
+      getTocken(param).then(res => {
+        console.log("返回的tocken是", res);
+        let tocken = res.data.access_token;
+        localStorage.setItem("token", tocken);
+      });
     }
   }
 };
