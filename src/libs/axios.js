@@ -1,31 +1,40 @@
 import axios from 'axios'
 import router from '../router'
 
-const instance = axios.create({
-    baseURL: process.env.BASE_API,
-    timeout: 50000
-})
+// const instance = axios.create({
+//     baseURL: process.env.BASE_API,
+//     timeout: 50000
+// })
 
 axios.defaults.baseURL = 'http://localhost:7788';
+axios.defaults.timeout = 50000;
 // 请求拦截
 axios.interceptors.request.use(
-    (confing) => {
+    (config) => {
         //设置请求头
         if (localStorage.getItem("token")) {
-            confing.headers.Authorization = "Bearer " + localStorage.getItem("token")
+            config.headers.Authorization = "Bearer " + localStorage.getItem("token")
         }
-        return confing
+        return config
     },
     (error) => {
-        toLogin()
-        return Promise.reject(error)
+        toLogin(error)
     }
 )
 
 axios.interceptors.response.use(
+    (response) => {
+        if (response.data) {
+        const result = response.data
+        //   response.success = result.success
+        //   response.exception = result.exception
+        //   response.msg = result.msg
+          response.value = result.data
+        }
+        return response
+    },
     (error) => {
-        toLogin()
-        return Promise.reject(error)
+        toLogin(error)
     }
 )
 

@@ -7,12 +7,21 @@
 </template>
 
 <script>
+import { hello } from "../api/userTenant/user.js";
 export default {
   name: "HelloWorld",
   data() {
     return {
       msg: "Welcome to Your Vue.js App"
     };
+  },
+  mounted() {
+    this.hello();
+  },
+  methods: {
+    hello() {
+      hello().then();
+    }
   }
 };
 </script>

@@ -35,6 +35,7 @@
 </template>
 <script>
 import { getTocken } from "../../api/login/login.js";
+import router from "../../router";
 import Vue from "vue";
 export default {
   data() {
@@ -50,7 +51,6 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log("登录信息", this.form);
       let param = {
         client_id: "cl",
         client_secret: "secret",
@@ -60,9 +60,11 @@ export default {
         password: this.form.password
       };
       getTocken(param).then(res => {
-        console.log("返回的tocken是", res);
         let tocken = res.data.access_token;
         localStorage.setItem("token", tocken);
+        router.replace({
+          path: "/"
+        });
       });
     }
   }
