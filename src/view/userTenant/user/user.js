@@ -1,6 +1,8 @@
 import { hello } from '../../../api/userTenant/user.js'
 import { selectList } from '../../../api/userTenant/tenant.js'
-import { selectListRecord,selectListTenant } from '../../../api/record/recordtype.js'
+import { selectListRecord, selectListTenant } from '../../../api/record/recordtype.js'
+import config from '../../../config'
+const portal = config.service.userTenant
 
 export default {
     data() {
@@ -8,6 +10,7 @@ export default {
             demo: '',
             labelCol: { span: 4 },
             wrapperCol: { span: 14 },
+            fileList:[],
             form: {
                 name: '',
                 region: null,
@@ -16,7 +19,11 @@ export default {
                 type: [],
                 resource: '',
                 desc: '',
-            }
+            },
+            action: `http://localhost:7788/user-tenant/user/uploadFile`,
+            headers: {
+                authorization: "Bearer " + localStorage.getItem("token")
+            },
         }
     },
     mounted() { 
@@ -46,7 +53,23 @@ export default {
         },
         onSubmit() {
             console.log('submit!', this.form);
-        }
+        },
+        beforeUpload() { },
+        remove() { },
+        handleChange(info) {
+            console.log(info)
+        //     if (info.file.status === 'done' && info.file.response.success && info.file.response.data) {
+        //       this.$message.success('操作成功')
+        //     } else if (info.file.status === 'error' && !info.file.response.success) {
+        //       this.$message.error('操作失败')
+        //     } else if (
+        //       (info.file.status === 'done' && !info.file.response.success) ||
+        //       (info.file.status === 'done' && !info.file.response.data)
+        //     ) {
+        //       this.$message.error('Excel内容有误,请检查后重新导入')
+        //     }
+        //     this.fileList = info.fileList
+          }
     }
 
 }
