@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import App from '@/App.vue'
 import Login from '@/view/login/login.vue'
 import User from '@/view/userTenant/user'
+import Seckill from '@/view/seckill'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/hello',
       name:'Hello',
       component: HelloWorld
+    },
+    {
+      path: '/seckill',
+      name:'Seckill',
+      component: Seckill
     }
   ]
 })

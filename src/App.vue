@@ -19,7 +19,7 @@
               <a-icon type="user" />
               <span>登陆页</span>
             </a-menu-item>
-            <a-sub-menu key="sub1">
+            <a-sub-menu key="test">
               <span slot="title">
                 <a-icon type="user" />
                 <span>测试分组</span>
@@ -31,6 +31,10 @@
               <a-menu-item key="user">
                 <a-icon type="upload" />
                 <span>用户</span>
+              </a-menu-item>
+              <a-menu-item key="seckill">
+                <a-icon type="video-camera" />
+                <span>秒杀</span>
               </a-menu-item>
             </a-sub-menu>
           </a-menu>
@@ -59,7 +63,7 @@
 </template>
 
 <script>
-import { hello } from "./api/userTenant/user.js";
+// import { hello } from "./api/userTenant/user.js";
 import router from "./router";
 
 export default {
