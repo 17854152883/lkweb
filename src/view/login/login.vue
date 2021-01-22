@@ -65,6 +65,7 @@ export default {
         router.replace({
           path: "/"
         });
+        window.location.reload();
       });
     }
   }
