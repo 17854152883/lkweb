@@ -1,13 +1,12 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <h2>Ecosystem</h2>
+  <div style="height:100vh">
+    欢迎页面
   </div>
 </template>
 
 <script>
 import { hello } from "../api/userTenant/user.js";
+
 export default {
   name: "HelloWorld",
   data() {
@@ -16,7 +15,7 @@ export default {
     };
   },
   mounted() {
-    this.hello();
+    // this.hello();
   },
   methods: {
     hello() {
@@ -28,19 +27,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
 }
 </style>
