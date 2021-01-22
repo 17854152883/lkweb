@@ -1,49 +1,60 @@
 <template>
   <div style="height:100vh">
-    <a-layout id="components-layout-demo-custom-trigger" style="height:100%">
-      <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
-        <div class="logo">
-          <img src="@/img/logo.jpg" style="height:32px;width:100%" />
-        </div>
-        <a-menu
-          theme="dark"
-          mode="inline"
-          @click="menuHandler"
-          :default-selected-keys="['1']"
-        >
-          <a-menu-item key="/login">
-            <a-icon type="user" />
-            <span>登陆页</span>
-          </a-menu-item>
-          <a-menu-item key="hello">
-            <a-icon type="video-camera" />
-            <span>欢迎</span>
-          </a-menu-item>
-          <a-menu-item key="user">
-            <a-icon type="upload" />
-            <span>用户</span>
-          </a-menu-item>
-        </a-menu>
-      </a-layout-sider>
-      <a-layout>
-        <a-layout-header style="background: #fff; padding: 0">
-          <a-icon
-            class="trigger"
-            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-            @click="() => (collapsed = !collapsed)"
-          />
-        </a-layout-header>
-        <a-layout-content
-          :style="{
-            margin: '12px 10px',
-            padding: '12px',
-            background: '#fff'
-          }"
-        >
-          <router-view />
-        </a-layout-content>
+    <template v-if="isLogin">
+      <router-view></router-view>
+    </template>
+    <template v-else>
+      <a-layout id="components-layout-demo-custom-trigger" style="height:100%">
+        <a-layout-sider v-model="collapsed" :trigger="null" collapsible>
+          <div class="logo">
+            <img src="@/img/logo.jpg" style="height:32px;width:100%" />
+          </div>
+          <a-menu
+            theme="dark"
+            mode="inline"
+            @click="menuHandler"
+            :default-selected-keys="['1']"
+          >
+            <a-menu-item key="/login">
+              <a-icon type="user" />
+              <span>登陆页</span>
+            </a-menu-item>
+            <a-sub-menu key="sub1">
+              <span slot="title">
+                <a-icon type="user" />
+                <span>测试分组</span>
+              </span>
+              <a-menu-item key="hello">
+                <a-icon type="video-camera" />
+                <span>欢迎</span>
+              </a-menu-item>
+              <a-menu-item key="user">
+                <a-icon type="upload" />
+                <span>用户</span>
+              </a-menu-item>
+            </a-sub-menu>
+          </a-menu>
+        </a-layout-sider>
+        <a-layout>
+          <a-layout-header style="background: #fff; padding: 0">
+            <a-icon
+              class="trigger"
+              :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+              @click="() => (collapsed = !collapsed)"
+            />
+          </a-layout-header>
+          <a-layout-content
+            :style="{
+              margin: '12px 10px',
+              padding: '12px',
+              background: '#fff'
+            }"
+          >
+            <router-view />
+          </a-layout-content>
+        </a-layout>
       </a-layout>
-    </a-layout>
+    </template>
   </div>
 </template>
 
@@ -56,15 +67,26 @@ export default {
   data() {
     return {
       collapsed: false,
+      isLogin: false,
       msg: "Welcome to Your Vue.js App"
     };
   },
   mounted() {
-    // this.hello();
+    this.hello();
   },
   methods: {
     hello() {
-      hello().then();
+      // hello().then();
+      let token = localStorage.getItem("token");
+      if (token === null || token === "" || token === undefined) {
+        router.replace({
+          path: "/login",
+          query: {
+            redirect: router.currentRoute.fullPath
+          }
+        });
+        this.isLogin = true;
+      }
     },
     menuHandler({ key }) {
       // this.$router.push({ path: key })
