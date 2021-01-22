@@ -16,24 +16,24 @@
             :default-selected-keys="['1']"
           >
             <a-menu-item key="/login">
-              <a-icon type="user" />
+              <a-icon type="login" />
               <span>登陆页</span>
             </a-menu-item>
             <a-sub-menu key="test">
               <span slot="title">
-                <a-icon type="user" />
+                <a-icon type="unordered-list" />
                 <span>测试分组</span>
               </span>
               <a-menu-item key="hello">
-                <a-icon type="video-camera" />
+                <a-icon type="smile" />
                 <span>欢迎</span>
               </a-menu-item>
               <a-menu-item key="user">
-                <a-icon type="upload" />
+                <a-icon type="user" />
                 <span>用户</span>
               </a-menu-item>
               <a-menu-item key="seckill">
-                <a-icon type="video-camera" />
+                <a-icon type="thunderbolt" />
                 <span>秒杀</span>
               </a-menu-item>
             </a-sub-menu>
